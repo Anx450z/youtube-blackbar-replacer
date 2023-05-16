@@ -1,0 +1,20 @@
+{
+  "name": "Video Color Analyzer",
+  "version": "1.0",
+  "description": "Captures the most prominent color of a video every second.",
+  "manifest_version": 3,
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.youtube.com/*"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ]
+}
