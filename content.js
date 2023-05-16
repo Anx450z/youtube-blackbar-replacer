@@ -105,6 +105,7 @@ function getAverageColorGradient(data, resx, resy){
   return [avgColorT, avgColorB]
 }
 
+const updateRate = 1000;
 
 setInterval(function() {
   if (youtubePlayer == null) return;
@@ -120,9 +121,8 @@ setInterval(function() {
   // const avgColor2 = getAverageColorGradient(data,videoStream.width, videoStream.height);
   // const mostFrequentColor = getMostFrequentColor(data);
 
-  console.log(avgColor)
   youtubePlayer.style.backgroundColor = avgColor;
   // youtubePlayer.style.background = `linear-gradient(${avgColor2[0]}, ${avgColor2[1]})`;
   
   youtubePlayer.style.transition = 'background 2s ease';
-}, 2500);
+}, updateRate);
