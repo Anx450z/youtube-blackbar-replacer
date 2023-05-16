@@ -3,7 +3,7 @@ const videoStream = document.getElementsByClassName("video-stream html5-main-vid
 
 function outBrightnessRange(r,g,b){
   const brightness = (r + g + b) / 3; // calculate brightness
-    if (brightness < 20 || brightness > 50) { // skip colors
+    if (brightness < 20 || brightness > 90) { // skip colors
       return true;
     }
     return false;
