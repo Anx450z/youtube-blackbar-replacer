@@ -3,7 +3,7 @@ const videoStream = document.getElementsByClassName("video-stream html5-main-vid
 
 function outBrightnessRange(r,g,b){
   const brightness = (r + g + b) / 3; // calculate brightness
-    if (brightness < 20 || brightness > 90) { // skip colors
+    if (brightness < 20 || brightness > 90) { // skip colors in range
       return true;
     }
     return false;
@@ -35,7 +35,9 @@ function getMostFrequentColor(data) {
 
 function getAverageColor(data){
   let r = 0, g = 0, b = 0;
-  for (let i = 0; i < data.length; i += 8) {
+  const pixel = 4; //4 sub-pixels create a pixel
+  const stepSize = 4*pixel; //Higher value is faster but less accurate
+  for (let i = 0; i < data.length; i += stepSize) {
     r += data[i];
     g += data[i + 1];
     b += data[i + 2];
@@ -43,7 +45,7 @@ function getAverageColor(data){
       continue
     }
   }
-  let numPixels = data.length / 8;
+  let numPixels = data.length / stepSize;
   let avgR = Math.round(r / numPixels);
   let avgG = Math.round(g / numPixels);
   let avgB = Math.round(b / numPixels);
@@ -105,7 +107,7 @@ function getAverageColorGradient(data, resx, resy){
   return [avgColorT, avgColorB]
 }
 
-const updateRate = 1000;
+const updateRate = 500; //Higher value is smoother but slower
 
 setInterval(function() {
   if (youtubePlayer == null) return;
@@ -124,5 +126,5 @@ setInterval(function() {
   youtubePlayer.style.backgroundColor = avgColor;
   // youtubePlayer.style.background = `linear-gradient(${avgColor2[0]}, ${avgColor2[1]})`;
   
-  youtubePlayer.style.transition = 'background 2s ease';
+  youtubePlayer.style.transition = `background ${updateRate/1000}s ease`;
 }, updateRate);
