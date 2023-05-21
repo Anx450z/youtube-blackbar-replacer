@@ -3,7 +3,7 @@ const videoStream = document.getElementsByClassName("video-stream html5-main-vid
 
 function outBrightnessRange(r,g,b){
   const brightness = (r + g + b) / 3; // calculate brightness
-    if (brightness < 20 || brightness > 90) { // skip colors in range
+    if (brightness < 20) { // skip colors in range
       return true;
     }
     return false;
@@ -36,7 +36,7 @@ function getMostFrequentColor(data) {
 function getAverageColor(data){
   let r = 0, g = 0, b = 0;
   const pixel = 4; //4 sub-pixels create a pixel
-  const stepSize = 4*pixel; //Higher value is faster but less accurate
+  const stepSize = 8 * pixel; //Higher value is faster but less accurate
   for (let i = 0; i < data.length; i += stepSize) {
     r += data[i];
     g += data[i + 1];
